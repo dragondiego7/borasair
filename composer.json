@@ -1,0 +1,21 @@
+{
+    "name": "mndiego/agenda",
+    "description": "Projeto de agenda para treino de rota e doctrine",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Diego",
+            "email": "diego@mentesnotaveis.com.br"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "respect/rest": "^0.6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Agenda\\": "src/"
+        }
+    }
+}
