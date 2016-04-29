@@ -1,9 +1,0 @@
-<?php 
-
-public class ContatoController(){
-	
-	
-	
-}
-
-?>
