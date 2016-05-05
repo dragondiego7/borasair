@@ -48,50 +48,25 @@ echo "<br /><br />";
 */
 
 echo "<pre>";
-var_dump($perfil->obterIdPerfil());
-
+echo $perfil->obterIdPerfil();
+echo "<br />";
 
 use EquipeBS\Modulos\Autenticacao\Modelos\Usuario;
 use EquipeBS\Modulos\Autenticacao\Repositorios\UsuarioRepositorio;
 
 $usuario = new Usuario();
-$usuario->definePerfilUsuario($perfil->obterIdPerfil());
+$usuario->definePerfilUsuario($perfil);
 $usuario->defineLoginUsuario("alisson@borasair.com.br");
 $usuario->defineSenhaUsuario("1234");
 $usuario->defineNomeUsuario("Alisson");
 $usuario->defineFotoUsuario("http://www.premiumdxb.com/assets/img/avatar/default-avatar.jpg");
 $usuario->defineDataNascimentoUsuario(new DateTime("now"));
 
-
 $usuarioRepositorio = new UsuarioRepositorio();
 
 $usuarioRepositorio->inserir($usuario);
 //$usuarioRepositorio->atualizar($usuario);
 
-$usuario = $usuarioRepositorio->encontrePorId(1)
-
-/*
-echo "<pre>";
-var_dump($usuario->obterIdUsuario());
-echo "<br /><br />";
-var_dump($usuario->obterPerfilUsuario());
-echo "<br /><br />";
-var_dump($usuario->obterLoginUsuario());
-echo "<br /><br />";
-var_dump($usuario->obterSenhaUsuario());
-echo "<br /><br />";
-var_dump($usuario->obterNomeUsuario());
-echo "<br /><br />";
-var_dump($usuario->obterFotoUsuario());
-echo "<br /><br />";
-var_dump($usuario->obterDataNascimentoUsuario());
-echo "<br /><br />";
-var_dump($usuario->obterDataCadastroUsuario());
-echo "<br /><br />";
-var_dump($usuario->obterDataAlteracaoUsuario());
-echo "<br /><br />";
-var_dump($usuario->obterAtivoUsuario());
-echo "<br /><br />";
-*/
+$usuario = $usuarioRepositorio->encontrePorId(3);
 
 ?>

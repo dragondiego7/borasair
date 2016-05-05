@@ -12,64 +12,64 @@ class Usuario
 {
 
 	/**
-	* @Id
-	* @Column(type="integer")
-	* @GeneratedValue(strategy="AUTO")
-	*/
+	 * @Id
+	 * @Column(type="integer")
+	 * @GeneratedValue(strategy="AUTO")
+	 */
 	private $idUsuario;
 
 	/**
-     * @ManyToOne(targetEntity="Perfil", inversedBy="usuario", fetch="LAZY")
+     * @ManyToOne(targetEntity="Perfil", cascade={"remove"})
      * @JoinColumn(name="fkPerfilUsuario", referencedColumnName="idPerfil")
      */
     private $perfil;
 
 	/**
-	*
-	* @Column(type="string")
-	*/
+	 *
+	 * @Column(type="string")
+	 */
 	private $loginUsuario;
 
 	/**
-	*
-	* @Column(type="string")
-	*/
+	 *
+	 * @Column(type="string")
+	 */
 	private $senhaUsuario;
 
 	/**
-	*
-	* @Column(type="string")
-	*/
+	 *
+	 * @Column(type="string")
+	 */
 	private $nomeUsuario;
 
 	/**
-	*
-	* @Column(type="string")
-	*/
+	 *
+	 * @Column(type="string")
+	 */
 	private $fotoUsuario;
 
 	/**
-	*
-	* @Column(type="datetime")
-	*/
+	 *
+	 * @Column(type="datetime")
+	 */
 	private $dataNascimentoUsuario;
 
 	/**
-	*
-	* @Column(type="datetime")
-	*/
+	 *
+	 * @Column(type="datetime")
+	 */
 	private $dataCadastroUsuario;
 
 	/**
-	*
-	* @Column(type="datetime")
-	*/
+	 *
+	 * @Column(type="datetime")
+	 */
 	private $dataAlteracaoUsuario;
 
 	/**
-	*
-	* @Column(type="integer")
-	*/
+	 *
+	 * @Column(type="integer")
+	 */
 	private $ativoUsuario = 1;
 
 	public function __construct(){
