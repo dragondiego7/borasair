@@ -67,6 +67,6 @@ $usuarioRepositorio = new UsuarioRepositorio();
 $usuarioRepositorio->inserir($usuario);
 //$usuarioRepositorio->atualizar($usuario);
 
-$usuario = $usuarioRepositorio->encontrePorId(3);
+$usuario = $usuarioRepositorio->encontrePorId(13);
 
 ?>
