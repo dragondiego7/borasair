@@ -2,6 +2,8 @@
 
 namespace EquipeBS\Modulos\Autenticacao\Modelos;
 
+use Datetime;
+
 /**
  * @Entity
  * @Table(name="usuario")
@@ -15,6 +17,12 @@ class Usuario
 	* @GeneratedValue(strategy="AUTO")
 	*/
 	private $idUsuario;
+
+	/**
+     * @ManyToOne(targetEntity="Perfil", inversedBy="usuario", fetch="LAZY")
+     * @JoinColumn(name="fkPerfilUsuario", referencedColumnName="idPerfil")
+     */
+    private $perfil;
 
 	/**
 	*
@@ -64,12 +72,27 @@ class Usuario
 	*/
 	private $ativoUsuario = 1;
 
+	public function __construct(){
+		$data = new DateTime("now");
+		
+		$this->dataCadastroUsuario = $data;
+		$this->dataAlteracaoUsuario = $data;
+	}
+
 	public function obterIdUsuario(){
 		return $this->idUsuario;
 	}
 
 	public function defineIdUsuario($idUsuario){
 		$this->idUsuario = $idUsuario;
+	}
+
+	public function obterPerfilUsuario(){
+		return $this->perfil;
+	}
+
+	public function definePerfilUsuario($perfil){
+		$this->perfil = $perfil;
 	}
 
 	public function obterLoginUsuario(){

@@ -5,27 +5,93 @@ require 'config/header.php';
 // Carrega arquivo com as configurações de bug
 require 'config/bug.php';
 
-use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
-
 // Carrega arquivo de autoload do composer
 require 'vendor/autoload.php';
+
+// Carrega arquivo de configuração de bando de dados
+require 'config/database.php';
 
 // Carrega arquivo de rotas da aplicação
 require 'config/rotas.php';
 
 
-$isDevMode = true;
+use EquipeBS\Modulos\Autenticacao\Modelos\Perfil;
+use EquipeBS\Modulos\Autenticacao\Repositorios\PerfilRepositorio;
 
-// Configurações de conexão de arquivo
-$dbParams = array(
-    'driver'   => 'pdo_mysql',
-    'user'     => 'root',
-    'password' => '123456',
-    'dbname'   => 'borasair_teste',
-);
+$perfil = new Perfil();
+$perfilRepositorio = new PerfilRepositorio();
+$perfil = $perfilRepositorio->encontrePorId(1);
 
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src/Modulos/Autenticacao/Modelos"), $isDevMode);
 
-$entityManager = EntityManager::create($dbParams, $config);
+/*
+$perfil = new Perfil();
+//$perfil = $perfilRepositorio->encontrePorId(1);
+
+$perfil->defineIdPerfil(1);
+$perfil->defineTituloPerfil("Administrador");
+$perfil->defineDescricaoPerfil("Perfil do administrador do sistema sem restrição no acesso.");
+
+$perfilRepositorio = new PerfilRepositorio();
+
+//$perfilRepositorio->inserir($perfil);
+//$perfilRepositorio->atualizar($perfil);
+
+$perfil = $perfilRepositorio->encontrePorId(1);
+
+echo "<pre>";
+var_dump($perfil->obterIdPerfil());
+echo "<br /><br />";
+var_dump($perfil->obterTituloPerfil());
+echo "<br /><br />";
+var_dump($perfil->obterDescricaoPerfil());
+echo "<br /><br />";
+*/
+
+echo "<pre>";
+var_dump($perfil->obterIdPerfil());
+
+
+use EquipeBS\Modulos\Autenticacao\Modelos\Usuario;
+use EquipeBS\Modulos\Autenticacao\Repositorios\UsuarioRepositorio;
+
+$usuario = new Usuario();
+$usuario->definePerfilUsuario($perfil->obterIdPerfil());
+$usuario->defineLoginUsuario("alisson@borasair.com.br");
+$usuario->defineSenhaUsuario("1234");
+$usuario->defineNomeUsuario("Alisson");
+$usuario->defineFotoUsuario("http://www.premiumdxb.com/assets/img/avatar/default-avatar.jpg");
+$usuario->defineDataNascimentoUsuario(new DateTime("now"));
+
+
+$usuarioRepositorio = new UsuarioRepositorio();
+
+$usuarioRepositorio->inserir($usuario);
+//$usuarioRepositorio->atualizar($usuario);
+
+$usuario = $usuarioRepositorio->encontrePorId(1)
+
+/*
+echo "<pre>";
+var_dump($usuario->obterIdUsuario());
+echo "<br /><br />";
+var_dump($usuario->obterPerfilUsuario());
+echo "<br /><br />";
+var_dump($usuario->obterLoginUsuario());
+echo "<br /><br />";
+var_dump($usuario->obterSenhaUsuario());
+echo "<br /><br />";
+var_dump($usuario->obterNomeUsuario());
+echo "<br /><br />";
+var_dump($usuario->obterFotoUsuario());
+echo "<br /><br />";
+var_dump($usuario->obterDataNascimentoUsuario());
+echo "<br /><br />";
+var_dump($usuario->obterDataCadastroUsuario());
+echo "<br /><br />";
+var_dump($usuario->obterDataAlteracaoUsuario());
+echo "<br /><br />";
+var_dump($usuario->obterAtivoUsuario());
+echo "<br /><br />";
+*/
+
 ?>

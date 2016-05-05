@@ -2,6 +2,8 @@
 
 namespace EquipeBS\Modulos\Autenticacao\Modelos;
 
+use Datetime;
+
 /**
  * @Entity
  * @Table(name="perfil")
@@ -15,7 +17,7 @@ class Perfil
 	* @GeneratedValue(strategy="AUTO")
 	*/
 	private $idPerfil;
-
+	
 	/**
 	*
 	* @Column(type="string")
@@ -27,24 +29,31 @@ class Perfil
 	* @Column(type="string")
 	*/
 	private $descricaoPerfil;
-
+	
 	/**
 	*
 	* @Column(type="datetime")
 	*/
 	private $dataCadastroPerfil;
-
+	
 	/**
 	*
 	* @Column(type="datetime")
 	*/
 	private $dataAlteracaoPerfil;
-
+	
 	/**
 	*
 	* @Column(type="integer")
 	*/
 	private $ativoPerfil = 1;
+	
+	public function __construct(){
+		$data = new DateTime("now");
+		
+		$this->dataCadastroPerfil = $data;
+		$this->dataAlteracaoPerfil = $data;
+	}
 	
 	public function obterIdPerfil(){
 		return $this->idPerfil;
@@ -59,7 +68,7 @@ class Perfil
 	}
 	
 	public function defineTituloPerfil($tituloPerfil){
-		$this->tituloPerfil = $tituloPerfil;
+		$this->tituloPerfil = utf8_decode($tituloPerfil);
 	}
 	
 	public function obterDescricaoPerfil(){
@@ -67,7 +76,7 @@ class Perfil
 	}
 	
 	public function defineDescricaoPerfil($descricaoPerfil){
-		$this->descricaoPerfil = $descricaoPerfil;
+		$this->descricaoPerfil = utf8_decode($descricaoPerfil);
 	}
 
 	public function obterDataCadastroPerfil(){
