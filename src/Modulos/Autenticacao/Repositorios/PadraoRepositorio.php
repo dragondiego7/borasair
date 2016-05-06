@@ -4,45 +4,24 @@ namespace EquipeBS\Modulos\Autenticacao\Repositorios;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
-abstract class AbstractRepositorio {
+class PadraoRepositorio {
 	// Variavel de gerenciamento das entidades
 	public $gerenciadorEntidade;
 
-	// Caminho para o pacote com as entidades
-	private $caminhoEntidade;
+	// Variavel com o caminho da classe modelo do objeto a ser utilizado
+	public $caminhoEntidade;
 
 	// Função com o construtor
-	function __construct($caminhoEntidadeVar) {
-		$this->caminhoEntidade = $caminhoEntidadeVar;
-		$this->gerenciadorEntidade = $this->criarGerenciadorEntidade();
-	}
-
-	public function criarGerenciadorEntidade() {
-		$caminhoParaEntidades = array (
-			"EquipeBS/Modulos/Autenticacao/Modelos"
-		);
-
-		$modoDev = true;
-		
-		$configuracaoGerenciadoEntidade = Setup::createAnnotationMetadataConfiguration($caminhoParaEntidades, $modoDev);
-
-		// Configurações de conexão de banco de dados para o doctrine
-		$dbParametros = array(
-		    'driver'   => 'pdo_mysql',
-		    'user'     => 'root',
-		    'password' => '123456',
-		    'dbname'   => 'borasair_teste',
-		);
-
-		// Retorna o gerenciado da entidade a parti do caminho informado e das fonfigurações
-		return EntityManager::create($dbParametros, $configuracaoGerenciadoEntidade);
+	function __construct($caminhoEntidade, $gerenciadorEntidade) {
+		$this->gerenciadorEntidade = $gerenciadorEntidade;
+		$this->caminhoEntidade = $caminhoEntidade;
 	}
 
 	// ==================================+
 	// DOCTRINE BUSCAR
 	// ==================================+
 	public function encontrePorId($id){
-		$obj = $this->gerenciadorEntidade ->find($this->caminhoEntidade, $id);
+		$obj = $this->gerenciadorEntidade->find($this->caminhoEntidade, $id);
 		return $obj;
 	}
 	
@@ -51,7 +30,7 @@ abstract class AbstractRepositorio {
 	// ==================================+
 	public function encontreTodos(){
 		$colecao = $this->gerenciadorEntidade->getRepository($this->caminhoEntidade)->findAll();
-
+		
 		$dados = array ();
 
 		foreach($colecao as $obj){

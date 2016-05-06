@@ -19,7 +19,7 @@ class Usuario
 	private $idUsuario;
 
 	/**
-     * @ManyToOne(targetEntity="Perfil", cascade={"remove"})
+     * @ManyToOne(targetEntity="Perfil")
      * @JoinColumn(name="fkPerfilUsuario", referencedColumnName="idPerfil")
      */
     private $perfil;
